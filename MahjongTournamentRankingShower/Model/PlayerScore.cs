@@ -19,8 +19,8 @@ namespace MahjongTournamentRankingShower.Model
         {
             this.id = int.Parse(string.IsNullOrEmpty(id) ? "0" : id);
             this.name = name;
-            this.points = int.Parse(string.IsNullOrEmpty(points) ? "0" : points); ;
-            this.score = int.Parse(string.IsNullOrEmpty(score) ? "0" : score); ;
+            this.points = int.Parse(string.IsNullOrEmpty(points) ? "0" : points);
+            this.score = int.Parse(string.IsNullOrEmpty(score) ? "0" : score);
             this.team = team;
             this.country = country;
         }
