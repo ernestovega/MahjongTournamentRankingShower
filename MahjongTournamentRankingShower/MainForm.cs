@@ -179,7 +179,7 @@ namespace MahjongTournamentRankingShower
                         }
                     }
                 }
-                return flagWrongExcel ? -1 : 1;
+                if(flagWrongExcel) return -1;
 
                 if (dataTableTeams == null || dataTableTeams.Rows == null || dataTableTeams.Columns == null)
                 {
@@ -191,9 +191,9 @@ namespace MahjongTournamentRankingShower
                     flagWrongExcel = true;
                     errorMessage += "\n\tThere aren´t enough columns in Teams sheet.";
                 }
-                else if (!dataTableTeams.Columns[1].ColumnName.ToString().ToLower().Equals("team") ||
-                    !dataTableTeams.Columns[2].ColumnName.ToString().ToLower().Equals("points") ||
-                    !dataTableTeams.Columns[3].ColumnName.ToString().ToLower().Equals("score"))
+                else if (!dataTableTeams.Columns[0].ColumnName.ToString().ToLower().Equals("team") ||
+                    !dataTableTeams.Columns[1].ColumnName.ToString().ToLower().Equals("points") ||
+                    !dataTableTeams.Columns[2].ColumnName.ToString().ToLower().Equals("score"))
                 {
                     flagWrongExcel = true;
                     errorMessage += "\n\tColumn headers doesn´t match in Teams sheet.";
@@ -206,8 +206,7 @@ namespace MahjongTournamentRankingShower
                         try
                         {
                             if (string.IsNullOrWhiteSpace(row[0].ToString()) || string.IsNullOrWhiteSpace(row[1].ToString()) ||
-                                string.IsNullOrWhiteSpace(row[2].ToString()) || string.IsNullOrWhiteSpace(row[3].ToString()) ||
-                                string.IsNullOrWhiteSpace(row[4].ToString()) || string.IsNullOrWhiteSpace(row[5].ToString()))
+                                string.IsNullOrWhiteSpace(row[2].ToString()))
                             {//Nos aseguramos de que no hay ninguna casilla vacía
                                 flagWrongExcel = true;
                                 AddNewTeamScoreFromExcel(row);
@@ -215,7 +214,7 @@ namespace MahjongTournamentRankingShower
                             else
                                 AddNewTeamScoreFromExcel(row);
                         }
-                        catch (Exception)
+                        catch (Exception e)
                         {
                             flagWrongExcel = true;
                             AddNewTeamScoreFromExcel(row);
@@ -250,10 +249,39 @@ namespace MahjongTournamentRankingShower
         private void ShowRanking()
         {
             playersScores.OrderBy(x => x.points).ThenBy(x => x.score);
+            teamsScores.OrderBy(x => x.points).ThenBy(x => x.score);
+            for (int i = 0; i < teamsScores.Count; i++)
+            {
+                sTeamsScores.Add(new string[] {
+                            (i + 1).ToString(),
+                            teamsScores[i].team,
+                            teamsScores[i].points.ToString(),
+                            teamsScores[i].score.ToString() });
+            }
 
             int start = 0, end = 15;
             while (true)
             {
+                sPlayersScores.Clear();
+                for (int i = start; i < end; i++)
+                {
+                    sPlayersScores.Add(new string[] {
+                        (i + 1).ToString(),
+                        playersScores[i].name,
+                        playersScores[i].points.ToString(),
+                        playersScores[i].score.ToString(),
+                        playersScores[i].team });
+                }
+
+                dataGridView.Invoke(new MethodInvoker(() => { showPlayers(); }));                
+                Thread.Sleep(SLEEP_TIME);
+
+                if(end >= playersScores.Count)
+                {
+                    dataGridView.Invoke(new MethodInvoker(() => { showTeams(); }));
+                    Thread.Sleep(SLEEP_TIME);
+                }
+
                 if (end < playersScores.Count)
                 {
                     start += 15;
@@ -265,32 +293,6 @@ namespace MahjongTournamentRankingShower
                     end = 15;
                 }
                 sPlayersScores.Clear();
-                for (int i = start; i < end; i++)
-                {
-                    sPlayersScores.Add(new string[] {
-                    (i + 1).ToString(),
-                    playersScores[i].name,
-                    playersScores[i].points.ToString(),
-                    playersScores[i].score.ToString(),
-                    playersScores[i].team });
-                }
-
-                dataGridView.Invoke(new MethodInvoker(() => { showPlayers(); }));                
-                Thread.Sleep(SLEEP_TIME);
-
-                if(end >= playersScores.Count)
-                {
-                    for (int i = 0; i < teamsScores.Count / 4; i++)
-                    {
-                        sTeamsScores.Add(new string[] {
-                            (i + 1).ToString(),
-                            teamsScores[i].team,
-                            teamsScores[i].points.ToString(),
-                            teamsScores[i].score.ToString() });
-                    }
-                    dataGridView.Invoke(new MethodInvoker(() => { showTeams(); }));
-                    Thread.Sleep(SLEEP_TIME);
-                }
             }
         }
 
