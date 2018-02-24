@@ -32,21 +32,21 @@ namespace MahjongTournamentRankingShower
 
             if (!isExcelInstalled())
             {
-                MessageBox.Show("Excel not present on your computer.\nPlease get it.");
+                MessageBox.Show(new Form() { TopMost = true }, "Excel not present on your computer.\nPlease get it.");
                 Application.Exit();
                 return;
             }
 
             if (!ExistsScoresFile())
             {
-                MessageBox.Show("Couldn't find scores excel.");
+                MessageBox.Show(new Form() { TopMost = true }, "Couldn't find scores excel.");
                 Application.Exit();
                 return;
             }
 
             if (ImportScores() < 0)
             {
-                MessageBox.Show(errorMessage);
+                MessageBox.Show(new Form() { TopMost = true }, errorMessage);
                 Application.Exit();
                 return;
             }
@@ -68,7 +68,7 @@ namespace MahjongTournamentRankingShower
             Type officeType = Type.GetTypeFromProgID("Excel.Application");
             if (officeType == null)
             {
-                MessageBox.Show("Excel is not present on your computer.");
+                MessageBox.Show(new Form() { TopMost = true }, "Excel is not present on your computer.");
                 return false;
             }
             else

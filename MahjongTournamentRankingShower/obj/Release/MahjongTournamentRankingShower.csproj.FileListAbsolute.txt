@@ -1,9 +1,0 @@
-C:\Users\Eto\Documents\Visual Studio 2015\Projects\MahjongTournamentRankingShower\MahjongTournamentRankingShower\bin\Release\MahjongTournamentRankingShower.exe.config
-C:\Users\Eto\Documents\Visual Studio 2015\Projects\MahjongTournamentRankingShower\MahjongTournamentRankingShower\bin\Release\MahjongTournamentRankingShower.exe
-C:\Users\Eto\Documents\Visual Studio 2015\Projects\MahjongTournamentRankingShower\MahjongTournamentRankingShower\bin\Release\MahjongTournamentRankingShower.pdb
-C:\Users\Eto\Documents\Visual Studio 2015\Projects\MahjongTournamentRankingShower\MahjongTournamentRankingShower\obj\Release\MahjongTournamentRankingShower.MainForm.resources
-C:\Users\Eto\Documents\Visual Studio 2015\Projects\MahjongTournamentRankingShower\MahjongTournamentRankingShower\obj\Release\MahjongTournamentRankingShower.Properties.Resources.resources
-C:\Users\Eto\Documents\Visual Studio 2015\Projects\MahjongTournamentRankingShower\MahjongTournamentRankingShower\obj\Release\MahjongTournamentRankingShower.SplashForm.resources
-C:\Users\Eto\Documents\Visual Studio 2015\Projects\MahjongTournamentRankingShower\MahjongTournamentRankingShower\obj\Release\MahjongTournamentRankingShower.csproj.GenerateResource.Cache
-C:\Users\Eto\Documents\Visual Studio 2015\Projects\MahjongTournamentRankingShower\MahjongTournamentRankingShower\obj\Release\MahjongTournamentRankingShower.exe
-C:\Users\Eto\Documents\Visual Studio 2015\Projects\MahjongTournamentRankingShower\MahjongTournamentRankingShower\obj\Release\MahjongTournamentRankingShower.pdb
